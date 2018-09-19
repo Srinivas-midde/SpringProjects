@@ -1,0 +1,17 @@
+package com.capgemini.bankapp.repository.impl;
+
+import com.capgemini.bankapp.repository.BankAccountRepository;
+
+public class BankAccountRepositoryImpl implements BankAccountRepository {
+
+	@Override
+	public double getBalance(long accountId) {
+		return 0;
+	}
+
+	@Override
+	public boolean updateBalance(long accountId, double newBalance) {
+		return false;
+	}
+
+}

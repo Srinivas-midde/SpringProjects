@@ -1,0 +1,35 @@
+package com.capgemini.bankapp.service.impl;
+
+import com.capgemini.bankapp.repository.BankAccountRepository;
+import com.capgemini.bankapp.service.BankAccountService;
+
+public class BankAccountServiceImpl implements BankAccountService {
+
+	private BankAccountRepository bankRepository;
+
+	@Override
+	public double getBalance(long accountId) {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+	@Override
+	public double withdraw(long accountId, double amount) {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+	@Override
+	public double deopsit(long accountId, double amount) {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+	@Override
+	public double fundTransfer(long fromAccount, long toAccount, double balance) {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+}
+

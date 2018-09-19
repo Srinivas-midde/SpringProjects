@@ -1,0 +1,28 @@
+package com.capgemini.bankapp.repository.impl;
+
+import java.util.HashSet;
+
+import com.capgemini.bankapp.entities.BankAccount;
+import com.capgemini.bankapp.repository.BankAccountRepository;
+
+public class BankAccountRepositoryImpl implements BankAccountRepository {
+
+	private HashSet<BankAccount> accounts;
+	
+	public BankAccountRepositoryImpl() {
+		super();
+		accounts = new HashSet<>();
+		accounts.add(new BankAccount(1234, "John Doe", "Savings", 34000));
+	}
+	
+	@Override
+	public double getBalance(long accountId) {
+		return 0;
+	}
+
+	@Override
+	public boolean updateBalance(long accountId, double newBalance) {
+		return false;
+	}
+
+}

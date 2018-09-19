@@ -1,0 +1,5 @@
+package com.capgemini.bankapp.entities;
+
+public class BankAccount {
+
+}

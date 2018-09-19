@@ -1,0 +1,9 @@
+package com.capgemini.bankapp.service;
+
+public interface BankAccountService {
+	
+	public double getBalance(long accountId);
+	public double withdraw(long accountId, double amount);
+	public double deposit(long accountId, double amount);
+	public double fundTransfer(long fromAccount, long toAccount, double balance);
+}

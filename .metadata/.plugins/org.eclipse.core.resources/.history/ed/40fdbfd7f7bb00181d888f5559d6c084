@@ -1,0 +1,5 @@
+package com.capgemini.bankapp.repositary;
+
+public class BankAccountRepositary {
+
+}

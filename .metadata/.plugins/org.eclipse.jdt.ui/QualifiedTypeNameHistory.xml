@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<qualifiedTypeNameHistroy>
+<fullyQualifiedTypeName name="java.util.HashSet"/>
+<fullyQualifiedTypeName name="com.capgemini.bankapp.entities.BankAccount"/>
+<fullyQualifiedTypeName name="com.capgemini.bankapp.service.BankAccountService"/>
+<fullyQualifiedTypeName name="com.capgemini.bankapp.exception.LowBalanceException"/>
+</qualifiedTypeNameHistroy>

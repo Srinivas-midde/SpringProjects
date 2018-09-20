@@ -2,3 +2,7 @@
 1537353496596	Rename package 'com.capgemini.bankapp.repositary'
 1537357104920	Rename method 'deopsit'
 1537357448322	Change method 'fundTransfer'
+1537431475385	Rename local variable 'bankaAccountController'
+1537441920544	Rename type 'dbutil'
+1537449903105	Rename type 'DbUtil'
+1537450309942	Rename resource 'values.properties'

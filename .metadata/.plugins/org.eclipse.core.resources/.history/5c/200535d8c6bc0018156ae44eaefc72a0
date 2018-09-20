@@ -1,0 +1,4 @@
+DB_URL = jdbc:mysql://localhost:3306/piggybank
+USERNAME = root
+PASSWORD = root
+DRIVER=com.mysql.cj.jdbc.Driver

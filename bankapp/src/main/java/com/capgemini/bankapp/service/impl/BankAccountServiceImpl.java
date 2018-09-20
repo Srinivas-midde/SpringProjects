@@ -1,57 +1,55 @@
 package com.capgemini.bankapp.service.impl;
 
-import com.capgemini.bankapp.exception.LowBalanceException;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import com.capgemini.bankapp.exception.AccountNotFoundException;
+import com.capgemini.bankapp.exception.InsufficientAccountBalanceException;
+import com.capgemini.bankapp.exception.NegativeAmountException;
 import com.capgemini.bankapp.repository.BankAccountRepository;
 import com.capgemini.bankapp.service.BankAccountService;
 
+@Service
 public class BankAccountServiceImpl implements BankAccountService {
 
+	@Autowired
 	private BankAccountRepository bankRepository;
 
-	public void setBankRepository(BankAccountRepository bankRepository) {
-		this.bankRepository = bankRepository;
-	}
-
 	@Override
-	public double getBalance(long accountId) {
+	public double getBalance(long accountId) throws AccountNotFoundException {
 		return bankRepository.getBalance(accountId);
 	}
 
 	@Override
-	public double withdraw(long accountId, double amount) throws LowBalanceException {
-		double balance = bankRepository.getBalance(accountId);
-		if (balance != -1) {
-			if (balance - amount >= 0) {
-				bankRepository.updateBalance(accountId, balance - amount);
-				return bankRepository.getBalance(accountId);
-			}
-			else
-				throw new LowBalanceException("You dont have sufficient funds");
-		}
-		return balance;
+	public double withdraw(long accountId, double amount) throws AccountNotFoundException {
+		double accountBalance = bankRepository.getBalance(accountId);
+		bankRepository.updateBalance(accountId, accountBalance - amount);
+		return accountBalance - amount;
 	}
 
 	@Override
-	public double deposit(long accountId, double amount) {
-		double balance = bankRepository.getBalance(accountId);
-		if (balance != -1) {
-			bankRepository.updateBalance(accountId, balance + amount);
-			return bankRepository.getBalance(accountId);
-		}
-		return balance;
+	public double deposit(long accountId, double amount) throws AccountNotFoundException {
+		double accountBalance = bankRepository.getBalance(accountId);
+		bankRepository.updateBalance(accountId, accountBalance + amount);
+		return accountBalance + amount;
 	}
 
 	@Override
-	public boolean fundTransfer(long fromAccount, long toAccount, double amount) throws LowBalanceException {
-		double balance = withdraw(fromAccount, amount);
-		if (balance != -1) {
-			if (deposit(toAccount, amount) == -1) {
-				deposit(fromAccount, amount);
-				return false;
-			}
+	public boolean fundTransfer(long fromAcc, long toAcc, double amount)
+			throws InsufficientAccountBalanceException, NegativeAmountException, AccountNotFoundException {
+		double accountBalanceFrom = bankRepository.getBalance(fromAcc);
+		
+		if (accountBalanceFrom < amount) 
+			throw new InsufficientAccountBalanceException("There isn't sufficient balance in your account!");
+		else if (amount < 0)
+			throw new NegativeAmountException("The amount cannot be negative!");
+		else {
+			BankAccountServiceImpl serviceobject;
+			serviceobject = new BankAccountServiceImpl();
+			serviceobject.deposit(toAcc, amount);
+			serviceobject.withdraw(fromAcc, amount);
 			return true;
 		}
-		return false;
 	}
 
 }

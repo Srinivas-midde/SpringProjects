@@ -1,0 +1,38 @@
+package com.capgemini.bankapp.util;
+
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.SQLException;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.context.annotation.PropertySource;
+import org.springframework.core.env.Environment;
+import org.springframework.stereotype.Component;
+
+@Component
+@PropertySource("classpath:values.properties")
+public class DbUtil {
+
+	
+	@Autowired
+ Environment env;
+	
+	@Value("${DRIVER}")
+	private String driver;
+	
+	public Connection getConnection() {
+		Connection connection = null;
+		try {
+			Class.forName(driver);
+			System.out.println(driver);
+			connection = DriverManager.getConnection((env.getProperty("DB_URL")),(env.getProperty("user")) ,(env.getProperty("PASSWORD")) );
+			if(connection != null)
+				System.out.println("--connected -- ");
+		}
+		catch(ClassNotFoundException | SQLException e) {
+			e.printStackTrace();
+		}
+		return connection;
+	}
+}

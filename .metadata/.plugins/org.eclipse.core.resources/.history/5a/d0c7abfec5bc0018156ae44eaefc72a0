@@ -1,0 +1,5 @@
+package com.capgemini.bankapp.util;
+
+public class dbutil {
+
+}
